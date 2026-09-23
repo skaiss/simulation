@@ -4,11 +4,16 @@ import simulation.entities.Entity;
 import simulation.entities.creatures.Creature;
 import simulation.search.BreadthFirstSearch;
 import simulation.worldmap.Coordinates;
+import simulation.worldmap.CoordinatesUtils;
 import simulation.worldmap.WorldMap;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class WorldMapIteratorAction {
 
-    BreadthFirstSearch bfs = new BreadthFirstSearch();
+    BreadthFirstSearch pathFinder = new BreadthFirstSearch();
+    List<Coordinates> result = new ArrayList<>();
 
     public void iterateWorldMap(WorldMap worldMap) {
         int mapHeight = worldMap.getWorldMapHeight();
@@ -17,10 +22,11 @@ public class WorldMapIteratorAction {
         for (int row = 0; row < mapHeight; row++) {
             for (int column = 0; column < mapWidth; column++) {
                 Coordinates coordinates = new Coordinates(column, row);
-                if(isCreature(coordinates, worldMap)){
-                    Creature creature = (Creature) worldMap.getEntity(coordinates,worldMap);
 
-                   bfs.findPath(coordinates, worldMap);
+                if(isCreature(coordinates, worldMap)) {
+                    Creature creature = (Creature) worldMap.getEntity(coordinates, worldMap);
+                    result = pathFinder.findPath(coordinates, worldMap);
+
                 }
             }
         }
