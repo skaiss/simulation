@@ -1,8 +1,11 @@
 package simulation.worldmap;
 
+import simulation.entities.Entity;
+import simulation.entities.obstacles.Rock;
+import simulation.entities.obstacles.Tree;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Random;
 
 public class CoordinatesUtils {
@@ -50,8 +53,13 @@ public class CoordinatesUtils {
         return !worldMap.getEntities().containsKey(coordinates);
     }
 
+    public static boolean isObstacle(Coordinates coordinates, WorldMap worldMap) {
+        Entity entity =  worldMap.getEntity(coordinates, worldMap);
+        return entity instanceof Rock || entity instanceof Tree;
+    }
 
 
-}
+
+    }
 
 

@@ -10,9 +10,11 @@ import simulation.worldmap.CoordinatesUtils;
 import simulation.worldmap.WorldMap;
 import simulation.renderer.ConsoleRenderer;
 
+import static java.lang.Thread.sleep;
+
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
 
         ConsoleRenderer renderer = new ConsoleRenderer();
         WorldMapFactory worldMapFactory = new WorldMapFactory();
@@ -20,9 +22,15 @@ public class Main {
         WorldMapIteratorAction worldMapIteratorAction = new WorldMapIteratorAction();
         WorldMap worldMap = worldMapFactory.createWorldMap(WorldMapSize.SMALL);
         spawnAction.execute(worldMap);
-        renderer.render(worldMap);
-        worldMapIteratorAction.iterateWorldMap(worldMap);
+//        renderer.render(worldMap);
+//        worldMapIteratorAction.iterateWorldMap(worldMap);
 
+        while(true){
+            renderer.render(worldMap);
+            worldMapIteratorAction.iterateWorldMap(worldMap);
+            System.out.println("\n");
+            sleep(1000);
+        }
 
 
 

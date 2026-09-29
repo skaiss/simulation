@@ -11,8 +11,6 @@ public class Herbivore extends Creature {
     public void makeMove(Coordinates startCoordinates, Coordinates targetCoordinates, WorldMap worldMap){
         Entity entity = worldMap.getEntity(startCoordinates, worldMap);
         worldMap.removeEntity(startCoordinates, worldMap);
-        //entity.findPath();
-        //
         worldMap.setEntity(startCoordinates, entity, worldMap);
     }
 

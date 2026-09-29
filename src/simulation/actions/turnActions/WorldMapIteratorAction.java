@@ -4,7 +4,6 @@ import simulation.entities.Entity;
 import simulation.entities.creatures.Creature;
 import simulation.search.BreadthFirstSearch;
 import simulation.worldmap.Coordinates;
-import simulation.worldmap.CoordinatesUtils;
 import simulation.worldmap.WorldMap;
 
 import java.util.ArrayList;
@@ -13,7 +12,7 @@ import java.util.List;
 public class WorldMapIteratorAction {
 
     BreadthFirstSearch pathFinder = new BreadthFirstSearch();
-    List<Coordinates> result = new ArrayList<>();
+    List<Coordinates> path = new ArrayList<>();
 
     public void iterateWorldMap(WorldMap worldMap) {
         int mapHeight = worldMap.getWorldMapHeight();
@@ -25,8 +24,9 @@ public class WorldMapIteratorAction {
 
                 if(isCreature(coordinates, worldMap)) {
                     Creature creature = (Creature) worldMap.getEntity(coordinates, worldMap);
-                    result = pathFinder.findPath(coordinates, worldMap);
-
+                    path = pathFinder.findPath(coordinates, worldMap);
+                    Coordinates move = path.getFirst();
+                    creature.makeMove(coordinates, move, worldMap);
                 }
             }
         }

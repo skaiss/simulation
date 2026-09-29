@@ -12,31 +12,22 @@ import java.util.*;
 
 public class BreadthFirstSearch {
 
-    public List<Coordinates> findPath(Coordinates coordinates, WorldMap worldMap){
+    public List<Coordinates> findPath(Coordinates startCoordinates, WorldMap worldMap){
         Queue<Coordinates> nextVisitCloseCells = new ArrayDeque<>();
-        //Set <Coordinates> visitedCells = new HashSet<>();
-        //List <Coordinates> result = new ArrayList<>();
         HashMap<Coordinates, Coordinates> parentCells = new HashMap<>();
 
-        nextVisitCloseCells.add(coordinates);
-        parentCells.put(coordinates, null);
+        nextVisitCloseCells.add(startCoordinates);
+        parentCells.put(startCoordinates, null); //????
 
-        Entity creature = worldMap.getEntity(coordinates,worldMap);
+        Entity creature = worldMap.getEntity(startCoordinates,worldMap);
+
         while (!nextVisitCloseCells.isEmpty()) {
             Coordinates current = nextVisitCloseCells.poll();
             Entity target = worldMap.getEntity(current, worldMap);
-//            if (visitedCells.contains(current)) {
-//                continue;
-//            }
-            //visitedCells.add(current);
-
 
             if (hasTargetEntity(creature, target)) {
-               return buildShortestPath(coordinates, current, parentCells);
-
+               return buildPath(startCoordinates, current, parentCells);
                 }
-
-            //nextVisitCloseCells.addAll(getAvailableMoveCloseCells(current, worldMap));
 
             for (Coordinates cell: getAvailableMoveCloseCells(current,worldMap)){
                 if(!parentCells.containsKey(cell)){
@@ -46,25 +37,21 @@ public class BreadthFirstSearch {
             }
 
         }
-        return Collections.emptyList();
+        return Collections.emptyList();  //??????????
     }
 
-    public List<Coordinates> buildShortestPath(Coordinates start, Coordinates target, HashMap<Coordinates, Coordinates> parentCells){
+    public List<Coordinates> buildPath(Coordinates start, Coordinates target, HashMap<Coordinates, Coordinates> parentCells){
         List <Coordinates> path = new ArrayList<>();
-
         Coordinates current = target;
+
             while(!current.equals(start)){
                 path.add(current);
                 current = parentCells.get(current);
             }
 
         Collections.reverse(path);
-
-
         return path;
     }
-
-
 
     public boolean hasTargetEntity(Entity creature, Entity target){
     if(creature instanceof Predator && target instanceof Herbivore){
@@ -73,10 +60,11 @@ public class BreadthFirstSearch {
         return creature instanceof Herbivore && target instanceof Grass;
     }
 
+
     public List<Coordinates> getAvailableMoveCloseCells (Coordinates coordinates, WorldMap worldMap){
         List<Coordinates> result = new ArrayList<>();
         for (Coordinates cell : CoordinatesUtils.getCloseCells(coordinates)){
-            if(CoordinatesUtils.isInBounds(cell, worldMap) && CoordinatesUtils.isCellEmpty(cell, worldMap)) {
+            if(CoordinatesUtils.isInBounds(cell, worldMap) && !CoordinatesUtils.isObstacle(cell, worldMap)) {
                 result.add(cell);
             }
         }
