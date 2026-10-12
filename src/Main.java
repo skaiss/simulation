@@ -1,39 +1,32 @@
 import simulation.actions.initActions.SpawnAction;
 import simulation.actions.turnActions.WorldMapIteratorAction;
-import simulation.entities.creatures.Predator;
-import simulation.entities.obstacles.Rock;
-import simulation.entities.obstacles.Tree;
 import simulation.factory.WorldMapFactory;
 import simulation.factory.WorldMapSize;
-import simulation.worldmap.Coordinates;
-import simulation.worldmap.CoordinatesUtils;
-import simulation.worldmap.WorldMap;
 import simulation.renderer.ConsoleRenderer;
+import simulation.worldmap.WorldMap;
 
-import static java.lang.Thread.sleep;
-
-
-public class Main {
-    public static void main(String[] args) throws InterruptedException {
-
-        ConsoleRenderer renderer = new ConsoleRenderer();
-        WorldMapFactory worldMapFactory = new WorldMapFactory();
-        SpawnAction spawnAction = new SpawnAction();
-        WorldMapIteratorAction worldMapIteratorAction = new WorldMapIteratorAction();
-        WorldMap worldMap = worldMapFactory.createWorldMap(WorldMapSize.SMALL);
-        spawnAction.execute(worldMap);
-//        renderer.render(worldMap);
-//        worldMapIteratorAction.iterateWorldMap(worldMap);
-
-        while(true){
-            renderer.render(worldMap);
-            worldMapIteratorAction.iterateWorldMap(worldMap);
-            System.out.println("\n");
-            sleep(1000);
-        }
+//import static java.lang.Thread.sleep;
 
 
+public static void main(String[] args) {
+
+    ConsoleRenderer renderer = new ConsoleRenderer();
+    WorldMapFactory worldMapFactory = new WorldMapFactory();
+    SpawnAction spawnAction = new SpawnAction();
+    WorldMapIteratorAction worldMapIteratorAction = new WorldMapIteratorAction();
+    WorldMap worldMap = worldMapFactory.createWorldMap(WorldMapSize.SMALL);
+    spawnAction.execute(worldMap);
+    renderer.render(worldMap);
+    worldMapIteratorAction.iterateWorldMap(worldMap);
+    renderer.render(worldMap);
 
 
-    }
+//        while(true){
+//            renderer.render(worldMap);
+//            worldMapIteratorAction.iterateWorldMap(worldMap);
+//            System.out.println("\n");
+//            sleep(1000);
+//        }
+
+
 }

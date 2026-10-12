@@ -23,14 +23,16 @@ public class BreadthFirstSearch {
 
         while (!nextVisitCloseCells.isEmpty()) {
             Coordinates current = nextVisitCloseCells.poll();
-            Entity target = worldMap.getEntity(current, worldMap);
 
-            if (hasTargetEntity(creature, target)) {
-               return buildPath(startCoordinates, current, parentCells);
+            for (Coordinates cell: getAvailableMoveCloseCells(current,worldMap)) {
+
+                Entity target = worldMap.getEntity(current, worldMap);
+
+                if (hasTargetEntity(creature, target)) {
+                    return buildPath(startCoordinates, current, parentCells);
                 }
 
-            for (Coordinates cell: getAvailableMoveCloseCells(current,worldMap)){
-                if(!parentCells.containsKey(cell)){
+                if (!parentCells.containsKey(cell)) {
                     parentCells.put(cell, current);
                     nextVisitCloseCells.add(cell);
                 }
@@ -53,13 +55,10 @@ public class BreadthFirstSearch {
         return path;
     }
 
-    public boolean hasTargetEntity(Entity creature, Entity target){
-    if(creature instanceof Predator && target instanceof Herbivore){
-        return true;
-    } else
-        return creature instanceof Herbivore && target instanceof Grass;
+    public boolean hasTargetEntity(Entity creature, Entity target) {
+        return creature instanceof Predator && target instanceof Herbivore ||
+                creature instanceof Herbivore && target instanceof Grass;
     }
-
 
     public List<Coordinates> getAvailableMoveCloseCells (Coordinates coordinates, WorldMap worldMap){
         List<Coordinates> result = new ArrayList<>();

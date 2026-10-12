@@ -25,7 +25,7 @@ public class WorldMapIteratorAction {
                 if(isCreature(coordinates, worldMap)) {
                     Creature creature = (Creature) worldMap.getEntity(coordinates, worldMap);
                     path = pathFinder.findPath(coordinates, worldMap);
-                    Coordinates move = path.getFirst();
+                    Coordinates move = path.get(1);
                     creature.makeMove(coordinates, move, worldMap);
                 }
             }

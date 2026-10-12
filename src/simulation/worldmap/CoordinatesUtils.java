@@ -6,22 +6,22 @@ import simulation.entities.obstacles.Tree;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
+//import java.util.Random;
 
 public class CoordinatesUtils {
 
-    private final static Random random = new Random();
+//    private final static Random random = new Random();
 
-    public static Coordinates getRandomCoordinates(WorldMap worldMap) {
-          while (true) {
-              int x = random.nextInt(worldMap.getWorldMapWidth());
-              int y = random.nextInt(worldMap.getWorldMapHeight());
-              Coordinates coordinates = new Coordinates(x,y);
-              if (CoordinatesUtils.isCellEmpty(coordinates, worldMap)) {
-                  return coordinates;
-              }
-          }
-      }
+//    public static Coordinates getRandomCoordinates(WorldMap worldMap) {
+//          while (true) {
+//              int x = random.nextInt(worldMap.getWorldMapWidth());
+//              int y = random.nextInt(worldMap.getWorldMapHeight());
+//              Coordinates coordinates = new Coordinates(x,y);
+//              if (CoordinatesUtils.isCellEmpty(coordinates, worldMap)) {
+//                  return coordinates;
+//              }
+//          }
+//      }
 
     public static List<Coordinates> getCloseCells(Coordinates coordinates){
         List<Coordinates> result = new ArrayList<>();
@@ -57,6 +57,7 @@ public class CoordinatesUtils {
         Entity entity =  worldMap.getEntity(coordinates, worldMap);
         return entity instanceof Rock || entity instanceof Tree;
     }
+
 
 
 

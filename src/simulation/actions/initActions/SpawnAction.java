@@ -26,9 +26,9 @@ public class SpawnAction extends Actions {
                     if (randomNumber < 5) {
                         worldMap.setEntity(coordinates,entityFactory.createEntity(HERBIVORE), worldMap);
                     }
-                    else if(randomNumber >= 5 && randomNumber < 10){
-                        worldMap.setEntity(coordinates,entityFactory.createEntity(PREDATOR),worldMap);
-                    }
+//                    else if(randomNumber >= 5 && randomNumber < 10){
+//                        worldMap.setEntity(coordinates,entityFactory.createEntity(PREDATOR),worldMap);
+//                    }
                     else if(randomNumber >= 10 && randomNumber < 20){
                         worldMap.setEntity(coordinates,entityFactory.createEntity(GRASS),worldMap);
                     }
