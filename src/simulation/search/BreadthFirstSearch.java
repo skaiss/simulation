@@ -26,7 +26,7 @@ public class BreadthFirstSearch {
 
             for (Coordinates cell: getAvailableMoveCloseCells(current,worldMap)) {
 
-                Entity target = worldMap.getEntity(current, worldMap);
+                Entity target = worldMap.getEntity(cell, worldMap);
 
                 if (hasTargetEntity(creature, target)) {
                     return buildPath(startCoordinates, current, parentCells);
@@ -63,7 +63,9 @@ public class BreadthFirstSearch {
     public List<Coordinates> getAvailableMoveCloseCells (Coordinates coordinates, WorldMap worldMap){
         List<Coordinates> result = new ArrayList<>();
         for (Coordinates cell : CoordinatesUtils.getCloseCells(coordinates)){
-            if(CoordinatesUtils.isInBounds(cell, worldMap) && !CoordinatesUtils.isObstacle(cell, worldMap)) {
+            if(CoordinatesUtils.isInBounds(cell, worldMap) &&
+                    !CoordinatesUtils.isObstacle(cell, worldMap)&&
+                    !CoordinatesUtils.hasCreature(cell, worldMap)) {
                 result.add(cell);
             }
         }

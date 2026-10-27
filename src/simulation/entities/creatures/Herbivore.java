@@ -9,9 +9,10 @@ public class Herbivore extends Creature {
 
     @Override
     public void makeMove(Coordinates startCoordinates, Coordinates targetCoordinates, WorldMap worldMap){
+
         Entity entity = worldMap.getEntity(startCoordinates, worldMap);
         worldMap.removeEntity(startCoordinates, worldMap);
-        worldMap.setEntity(startCoordinates, entity, worldMap);
+        worldMap.setEntity(targetCoordinates, entity, worldMap);
     }
 
 

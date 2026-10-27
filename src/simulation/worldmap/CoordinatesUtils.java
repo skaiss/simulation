@@ -1,6 +1,7 @@
 package simulation.worldmap;
 
 import simulation.entities.Entity;
+import simulation.entities.creatures.Creature;
 import simulation.entities.obstacles.Rock;
 import simulation.entities.obstacles.Tree;
 
@@ -58,6 +59,13 @@ public class CoordinatesUtils {
         return entity instanceof Rock || entity instanceof Tree;
     }
 
+    public static boolean hasCreature(Coordinates coordinates, WorldMap worldMap){
+        Entity entity =  worldMap.getEntity(coordinates, worldMap);
+        if(entity instanceof Creature){
+            return true;
+        }
+        return false;
+    }
 
 
 

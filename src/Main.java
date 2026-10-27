@@ -5,10 +5,10 @@ import simulation.factory.WorldMapSize;
 import simulation.renderer.ConsoleRenderer;
 import simulation.worldmap.WorldMap;
 
-//import static java.lang.Thread.sleep;
+import static java.lang.Thread.sleep;
 
 
-public static void main(String[] args) {
+public static void main(String[] args) throws InterruptedException {
 
     ConsoleRenderer renderer = new ConsoleRenderer();
     WorldMapFactory worldMapFactory = new WorldMapFactory();
@@ -16,17 +16,20 @@ public static void main(String[] args) {
     WorldMapIteratorAction worldMapIteratorAction = new WorldMapIteratorAction();
     WorldMap worldMap = worldMapFactory.createWorldMap(WorldMapSize.SMALL);
     spawnAction.execute(worldMap);
-    renderer.render(worldMap);
-    worldMapIteratorAction.iterateWorldMap(worldMap);
-    renderer.render(worldMap);
+//    renderer.render(worldMap);
+//    worldMapIteratorAction.iterateWorldMap(worldMap);
+//    renderer.render(worldMap);
 
+        renderer.render(worldMap);
+        while(true){
+            worldMapIteratorAction.iterateWorldMap(worldMap);
+            renderer.render(worldMap);
+            System.out.println("\n");
+            sleep(1000);
+        }
 
-//        while(true){
-//            renderer.render(worldMap);
-//            worldMapIteratorAction.iterateWorldMap(worldMap);
-//            System.out.println("\n");
-//            sleep(1000);
-//        }
 
 
 }
+
+

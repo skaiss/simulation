@@ -8,6 +8,7 @@ public class Predator extends Creature {
 
     @Override
     public void makeMove(Coordinates startCoordinates, Coordinates targetCoordinates, WorldMap worldMap){
+
         Entity entity = worldMap.getEntity(startCoordinates, worldMap);
         worldMap.removeEntity(startCoordinates, worldMap);
         worldMap.setEntity(targetCoordinates, entity, worldMap);
